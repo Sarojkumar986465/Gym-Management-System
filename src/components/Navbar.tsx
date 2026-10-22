@@ -14,16 +14,24 @@ import {
   Menu, 
   X,
   LogOut,
-  ChevronDown
+  ChevronDown,
+  Home,
+  GraduationCap
 } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: string;
   setCurrentTab: (tab: string) => void;
   onOpenActiveWorkout: () => void;
+  onOpenDeveloperModal?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpenActiveWorkout }) => {
+export const Navbar: React.FC<NavbarProps> = ({ 
+  currentTab, 
+  setCurrentTab, 
+  onOpenActiveWorkout,
+  onOpenDeveloperModal 
+}) => {
   const { currentUser, switchRole, logout, activeWorkout, activeWorkoutTimer } = useGym();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
@@ -35,6 +43,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
   };
 
   const navItems = [
+    { id: 'landing', label: 'Landing / Home', icon: Home, roles: ['MEMBER', 'TRAINER', 'ADMIN'] },
     { id: 'dashboard', label: 'Dashboard', icon: Target, roles: ['MEMBER', 'TRAINER', 'ADMIN'] },
     { id: 'workouts', label: 'Workouts', icon: Dumbbell, roles: ['MEMBER'] },
     { id: 'plans', label: 'Plans', icon: CalendarDays, roles: ['MEMBER', 'TRAINER', 'ADMIN'] },
@@ -46,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
   ];
 
   const visibleNav = navItems.filter(item => 
-    currentUser ? item.roles.includes(currentUser.role) : ['dashboard', 'plans', 'exercises'].includes(item.id)
+    currentUser ? item.roles.includes(currentUser.role) : ['landing', 'dashboard', 'plans', 'exercises'].includes(item.id)
   );
 
   const handleRoleSelect = (role: Role) => {
@@ -60,13 +69,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
   return (
     <header className="sticky top-0 z-40 w-full bg-[#090d16]/95 backdrop-blur-md border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 gap-8">
+        <div className="flex items-center justify-between h-16 gap-4 sm:gap-8">
           
           {/* Zone 1: Brand Wordmark */}
           <div className="flex items-center gap-3 shrink-0">
             <button
-              onClick={() => setCurrentTab('dashboard')}
+              onClick={() => setCurrentTab('landing')}
               className="flex items-center gap-2.5 text-left group focus:outline-none"
+              title="Return to Landing Page"
             >
               <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:border-emerald-500/60 transition-colors">
                 <Dumbbell className="w-5 h-5" />
@@ -76,7 +86,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
                   Gym Management System
                 </span>
                 <span className="text-[10px] tracking-wider text-slate-400 font-medium uppercase mt-0.5">
-                  Tracker & Admin Portal
+                  by Saroj Kumar (MCA)
                 </span>
               </div>
             </button>
@@ -107,6 +117,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
           {/* Zone 3: Actions, Active Workout Status, Role Switcher */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             
+            {/* Developer Profile Quick Trigger */}
+            {onOpenDeveloperModal && (
+              <button
+                onClick={onOpenDeveloperModal}
+                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-white text-xs font-medium hover:border-emerald-500/40 transition-colors"
+                title="Developer Profile: Saroj Kumar (MCA Student)"
+              >
+                <GraduationCap className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="hidden xl:inline">Saroj Kumar (MCA)</span>
+                <span className="xl:hidden">Developer</span>
+              </button>
+            )}
+
             {/* Active Workout Live Session Pill Button */}
             {activeWorkout && (
               <button
@@ -132,7 +155,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
               </button>
             )}
 
-
             {/* Role Switcher Pill Dropdown */}
             {currentUser && (
               <div className="relative">
@@ -150,7 +172,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
                 </button>
 
                 {roleDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-60 rounded-lg bg-slate-900 border border-slate-800 shadow-xl py-1 z-50 text-xs">
+                  <div className="absolute right-0 mt-2 w-64 rounded-lg bg-slate-900 border border-slate-800 shadow-xl py-1 z-50 text-xs">
                     <div className="px-3 py-2 border-b border-slate-800">
                       <p className="text-[11px] text-slate-400">Logged in as</p>
                       <p className="font-semibold text-white truncate">{currentUser.fullName}</p>
@@ -185,6 +207,28 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
                     </div>
 
                     <div className="border-t border-slate-800 pt-1">
+                      {onOpenDeveloperModal && (
+                        <button
+                          onClick={() => {
+                            setRoleDropdownOpen(false);
+                            onOpenDeveloperModal();
+                          }}
+                          className="w-full text-left px-3 py-1.5 text-emerald-400 hover:bg-slate-800 flex items-center gap-2 transition-colors"
+                        >
+                          <GraduationCap className="w-3.5 h-3.5" />
+                          <span>About Developer (Saroj Kumar)</span>
+                        </button>
+                      )}
+                      <button
+                        onClick={() => {
+                          setRoleDropdownOpen(false);
+                          setCurrentTab('landing');
+                        }}
+                        className="w-full text-left px-3 py-1.5 text-slate-300 hover:bg-slate-800 flex items-center gap-2 transition-colors"
+                      >
+                        <Home className="w-3.5 h-3.5 text-slate-400" />
+                        <span>View Landing Page</span>
+                      </button>
                       <button
                         onClick={() => {
                           setRoleDropdownOpen(false);
@@ -263,6 +307,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
               </button>
             );
           })}
+
+          {onOpenDeveloperModal && (
+            <button
+              onClick={() => {
+                onOpenDeveloperModal();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md text-left text-emerald-400 hover:bg-slate-800/60 transition-colors pt-2 border-t border-slate-800"
+            >
+              <GraduationCap className="w-4 h-4" />
+              <span>Developer Profile: Saroj Kumar (MCA)</span>
+            </button>
+          )}
         </div>
       )}
     </header>

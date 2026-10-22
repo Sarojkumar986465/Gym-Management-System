@@ -9,7 +9,6 @@ import {
   Search, 
   UserCheck, 
   UserX, 
-  RotateCcw, 
   Activity, 
   Flame, 
   CheckCircle,
@@ -27,7 +26,9 @@ import {
   Award,
   Check,
   Receipt,
-  Download
+  Download,
+  GraduationCap,
+  Mail
 } from 'lucide-react';
 
 export const AdminDashboard: React.FC = () => {
@@ -53,8 +54,7 @@ export const AdminDashboard: React.FC = () => {
     deleteSubscriptionPlan,
     addPaymentRecord,
     updatePaymentStatus,
-    toggleUserStatus, 
-    resetToDefaults 
+    toggleUserStatus
   } = useGym();
 
   const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'MEMBERS' | 'TRAINERS' | 'PAYMENTS' | 'SUBSCRIPTIONS' | 'EXERCISES' | 'AUDIT'>('OVERVIEW');
@@ -304,18 +304,11 @@ export const AdminDashboard: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <button
-              onClick={() => {
-                if (window.confirm('Reset all demo data back to clean factory state?')) {
-                  resetToDefaults();
-                }
-              }}
-              className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg text-xs font-medium flex items-center gap-2 transition-colors"
-            >
-              <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
-              <span>Reset Database</span>
-            </button>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs text-slate-300">
+              <GraduationCap className="w-4 h-4 text-emerald-400" />
+              <span>Developed by <strong className="text-white">Saroj Kumar</strong> (MCA Student)</span>
+            </div>
           </div>
         </div>
       </div>

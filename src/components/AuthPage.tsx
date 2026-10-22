@@ -342,9 +342,12 @@ export const AuthPage: React.FC<AuthPageProps> = ({ initialMode = 'LOGIN', onSuc
 
         </div>
 
-        {/* Security Footer note */}
+        {/* Security & Developer Footer note */}
         <div className="text-center text-[11px] text-slate-500 space-y-1">
           <p>Protected by Spring Security 6, BCrypt Password Encryption, and Role-Based Authorization.</p>
+          <p className="text-slate-400">
+            Engineered by <span className="text-emerald-400 font-medium">Saroj Kumar</span> · MCA Student (<span className="font-mono">sk9864652@gmail.com</span>)
+          </p>
         </div>
 
       </div>
