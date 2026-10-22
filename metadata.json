@@ -1,0 +1,6 @@
+{
+  "name": "IronPulse Gym Workout & Tracker Management System",
+  "description": "Complete full-stack gym workout, diet, exercise library, and trainer-member management system with role-based access control, progress analytics, and Java Spring Boot MySQL integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
