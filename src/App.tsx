@@ -100,14 +100,14 @@ function AppContent() {
           <div className="flex items-center gap-2">
             <span className="font-bold text-slate-400">Gym Management System</span>
             <span>·</span>
-            <span>Java 17 Spring Boot 3 & MySQL Architecture</span>
+            <span>Enterprise Workout & Member Platform</span>
           </div>
           <div className="flex items-center gap-4 text-[11px] text-slate-400">
             <button onClick={() => setCurrentTab('admin-panel')} className="hover:text-emerald-400 transition-colors">
               Admin Console
             </button>
-            <button onClick={() => setCurrentTab('java-backend')} className="hover:text-emerald-400 transition-colors">
-              Java Source Files
+            <button onClick={() => setCurrentTab('plans')} className="hover:text-emerald-400 transition-colors">
+              Workout Plans
             </button>
             <button onClick={() => setCurrentTab('exercises')} className="hover:text-emerald-400 transition-colors">
               Exercise Library

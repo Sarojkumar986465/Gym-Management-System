@@ -10,7 +10,6 @@ import {
   CalendarDays, 
   Users, 
   ShieldAlert, 
-  Code2, 
   Play, 
   Menu, 
   X,
@@ -44,11 +43,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
     { id: 'goals', label: 'Goals & Progress', icon: Flame, roles: ['MEMBER'] },
     { id: 'trainer-roster', label: 'Assigned Members', icon: Users, roles: ['TRAINER'] },
     { id: 'admin-panel', label: 'Admin Console', icon: ShieldAlert, roles: ['ADMIN'] },
-    { id: 'java-backend', label: 'Java Spring & MySQL', icon: Code2, roles: ['MEMBER', 'TRAINER', 'ADMIN'] },
   ];
 
   const visibleNav = navItems.filter(item => 
-    currentUser ? item.roles.includes(currentUser.role) : ['dashboard', 'exercises', 'java-backend'].includes(item.id)
+    currentUser ? item.roles.includes(currentUser.role) : ['dashboard', 'plans', 'exercises'].includes(item.id)
   );
 
   const handleRoleSelect = (role: Role) => {
