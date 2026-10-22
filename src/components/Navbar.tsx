@@ -15,7 +15,8 @@ import {
   Menu, 
   X,
   LogOut,
-  ChevronDown
+  ChevronDown,
+  FileArchive
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -133,6 +134,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
                 <span>Admin Console</span>
               </button>
             )}
+
+            {/* Direct Backend ZIP Download Link */}
+            <a
+              href="/gym-management-system-backend.zip"
+              download="gym-management-system-backend.zip"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium hover:bg-emerald-500/20 transition-colors cursor-pointer"
+              title="Download Java Spring Boot Backend .ZIP"
+            >
+              <FileArchive className="w-3.5 h-3.5" />
+              <span>Download ZIP</span>
+            </a>
 
             {/* Role Switcher Pill Dropdown */}
             {currentUser && (

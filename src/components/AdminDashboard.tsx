@@ -27,7 +27,8 @@ import {
   Award,
   Check,
   Receipt,
-  Download
+  Download,
+  FileArchive
 } from 'lucide-react';
 
 export const AdminDashboard: React.FC = () => {
@@ -305,6 +306,15 @@ export const AdminDashboard: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2.5">
+            <a
+              href="/gym-management-system-backend.zip"
+              download="gym-management-system-backend.zip"
+              className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold flex items-center gap-2 shadow-xs transition-colors cursor-pointer"
+            >
+              <FileArchive className="w-3.5 h-3.5" />
+              <span>Download Backend (.ZIP)</span>
+            </a>
+
             <button
               onClick={() => {
                 if (window.confirm('Reset all demo data back to clean factory state?')) {
